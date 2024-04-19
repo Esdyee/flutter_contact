@@ -4,6 +4,8 @@ void main() {
   runApp(const MyApp());
 }
 
+var a = 1;
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -12,22 +14,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              print(a);
+              a++;
+            },
+            child: Text(a.toString()),
+          ),
           appBar: AppBar(),
-          body: ListView(
-            children: const <Widget>[
-              ListTile(
-                title: Text('홍길동'),
-                leading: Icon(Icons.person),
-              ),
-              ListTile(
-                title: Text('홍길동'),
-                leading: Icon(Icons.person),
-              ),
-              ListTile(
-                title: Text('홍길동'),
-                leading: Icon(Icons.person),
-              ),
-            ],
+          body: ListView.builder(
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text('Item $index'),
+                leading: Icon(Icons.account_circle),
+                trailing: Icon(Icons.arrow_forward),
+              );
+            },
           ),
           bottomNavigationBar: BottomAppBar(
             child: Row(
