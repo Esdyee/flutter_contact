@@ -13,8 +13,41 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         home: Scaffold(
           appBar: AppBar(),
-          body: Container(),
-          bottomNavigationBar: BottomAppBar(),
+          body: ListView(
+            children: const <Widget>[
+              ListTile(
+                title: Text('홍길동'),
+                leading: Icon(Icons.person),
+              ),
+              ListTile(
+                title: Text('홍길동'),
+                leading: Icon(Icons.person),
+              ),
+              ListTile(
+                title: Text('홍길동'),
+                leading: Icon(Icons.person),
+              ),
+            ],
+          ),
+          bottomNavigationBar: BottomAppBar(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.phone),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: Icon(Icons.chat),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: Icon(Icons.contact_page),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ),
         )
     );
   }
