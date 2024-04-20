@@ -4,10 +4,18 @@ void main() {
   runApp(const MyApp());
 }
 
-var a = 1;
-
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  var a = 1;
+  var names = ['Steve', 'John', 'Robert', 'Doe', 'Smith'];
+  var likes = [0, 0, 0, 0, 0];
 
   // This widget is the root of your application.
   @override
@@ -17,18 +25,42 @@ class MyApp extends StatelessWidget {
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               print(a);
-              a++;
+              setState(() {
+                a++;
+              });
             },
             child: Text(a.toString()),
           ),
-          appBar: AppBar(),
+          appBar: AppBar(
+            title: Text(
+                'My App',
+                style: TextStyle(
+                  color: Colors.white,
+                )
+            ),
+            backgroundColor: Colors.blue,
+          ),
           body: ListView.builder(
             itemCount: 5,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text('Item $index'),
-                leading: Icon(Icons.account_circle),
-                trailing: Icon(Icons.arrow_forward),
+                  title: Text(names[index]),
+                  // leading: Icon(Icons.account_circle),
+                  leading: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text(likes[index].toString()),
+                      Icon(Icons.account_circle),
+                    ],
+                  ),
+                  trailing: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        likes[index]++;
+                      });
+                    },
+                    child: Text('좋아요'),
+                  )
               );
             },
           ),
